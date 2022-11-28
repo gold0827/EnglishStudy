@@ -1,5 +1,4 @@
 import os
-import pysrt
 
 class SUBTITLES_READER(object):
     def __init__(self, subtitles_path1:str, subtitles_path2:str, lang:tuple):
@@ -24,11 +23,13 @@ class SUBTITLES_READER(object):
     def _join_twosrt(self, dict1, dict2):
         set1 = set(dict1.keys())
         set2 = set(dict2.keys())
+        unionset = set1.intersection(set2)
         text1 = []
         text2 = []
-        for key in set1.intersection(set2):
-            text1.append(dict1[key])
-            text2.append(dict2[key])
+        for key in dict1.keys():
+            if key in unionset:
+                text1.append(dict1[key])
+                text2.append(dict2[key])
         return text1, text2
     
     def _smi_decode(self, path):
@@ -82,5 +83,5 @@ class SUBTITLES_READER(object):
                     temp_text = ''
                     start_flag = False
                 else:
-                    temp_text += rawtext.replace('<i>', '').replace('</i>', '').replace('\u200e', '')
+                    temp_text += ' ' + rawtext.replace('<i>', '').replace('</i>', '').replace('\u200e', '')
         return texts
