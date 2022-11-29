@@ -1,7 +1,11 @@
 import os
+import pandas as pd
 
 class SUBTITLES_READER(object):
-    def __init__(self, subtitles_path1:str, subtitles_path2:str, lang:tuple):
+    def __init__(self):
+        pass
+
+    def setting(self, subtitles_path1:str, subtitles_path2:str, lang:tuple):
         self.path1 = subtitles_path1
         self.path2 = subtitles_path2
         self.sub_type1 = os.path.splitext(self.path1)[1]
@@ -9,17 +13,30 @@ class SUBTITLES_READER(object):
         assert self.sub_type1 == self.sub_type2, 'Ext of two subtitles are different.'
         self.sub_type = self.sub_type1
         self.lang = lang
-        
+
+    def setting(self, subtitles_path:str, lang:tuple):
+        self.path = subtitles_path
+        self.sub_type = os.path.splitext(self.path)[1]
+        assert self.sub_type == '.xlsx', 'Ext is not Netflix xlsx'
+        self.lang = lang
+
     def decode(self) -> dict:
         if self.sub_type == '.smi':
             return {self.lang[0]:self._smi_decode(self.path1), self.lang[1]:self._smi_decode(self.path2)}
         elif self.sub_type == '.srt':
             text1, text2 = self._join_twosrt(self._srt_decode(self.path1), self._srt_decode(self.path2))
             return {self.lang[0]:text1, self.lang[1]:text2}
+        elif self.sub_type == '.xlsx':
+            text1, text2 = self._xlsx_decode(self.path)
+            return {self.lang[0]:text1, self.lang[1]:text2}
         else:
             print("Wrong type subtitle!")
             exit()
     
+    def _xlsx_decode(self, path):
+        df = pd.read_excel(path)
+        return df['Subtitle'].to_list(), df['Translation'].str.replace('\n',' ').str.replace('\u200e','').to_list()
+
     def _join_twosrt(self, dict1, dict2):
         set1 = set(dict1.keys())
         set2 = set(dict2.keys())
