@@ -5,19 +5,19 @@ class SUBTITLES_READER(object):
     def __init__(self):
         pass
 
-    def setting(self, subtitles_path1:str, subtitles_path2:str, lang:tuple):
-        self.path1 = subtitles_path1
-        self.path2 = subtitles_path2
-        self.sub_type1 = os.path.splitext(self.path1)[1]
-        self.sub_type2 = os.path.splitext(self.path2)[1]
-        assert self.sub_type1 == self.sub_type2, 'Ext of two subtitles are different.'
-        self.sub_type = self.sub_type1
-        self.lang = lang
-
-    def setting(self, subtitles_path:str, lang:tuple):
-        self.path = subtitles_path
-        self.sub_type = os.path.splitext(self.path)[1]
-        assert self.sub_type == '.xlsx', 'Ext is not Netflix xlsx'
+    def setting(self, subtitles_paths:list, lang:tuple):
+        n = len(subtitles_paths)
+        if n == 2:
+            self.path1 = subtitles_paths[0]
+            self.path2 = subtitles_paths[1]
+            self.sub_type1 = os.path.splitext(self.path1)[1]
+            self.sub_type2 = os.path.splitext(self.path2)[1]
+            assert self.sub_type1 == self.sub_type2, 'Ext of two subtitles are different.'
+            self.sub_type = self.sub_type1
+        elif n == 1:
+            self.path = subtitles_paths[0]
+            self.sub_type = os.path.splitext(self.path)[1]
+            assert self.sub_type == '.xlsx', 'Ext is not Netflix xlsx'
         self.lang = lang
 
     def decode(self) -> dict:
