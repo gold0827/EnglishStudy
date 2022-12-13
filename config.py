@@ -11,9 +11,9 @@ class convertConfig:
     output_dir    = './results'
     subtitles_dir = './subtitles'
 
-    subtitle01    = 'Wednesday.S01E01.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_en.srt'
-    subtitle02    = 'Wednesday.S01E01.Wednesdays.Child.is.Full.of.Woe.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_ko.srt'
-    output_file   = 'WednesdayS01E01.pdf'
+    subtitle01    = '.srt'
+    subtitle02    = '.srt'
+    output_file   = '.pdf'
     font_file     = 'Arial-Unicode-Regular.ttf'
     add_line      = False
     target_lang   = ['en', 'ko'] 

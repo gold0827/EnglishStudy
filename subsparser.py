@@ -22,7 +22,7 @@ class SUBTITLES_PARSER(object):
 
     def parser(self) -> dict:
         if self.sub_type == '.smi':
-            return {self.lang[0]:self._smi_decode(self.path1), self.lang[1]:self._smi_decode(self.path2)}
+            return {self.lang[0]:self._smi_parser(self.path1), self.lang[1]:self._smi_parser(self.path2)}
         elif self.sub_type == '.srt':
             text1, text2 = self._join_twosrt(self._srt_parser(self.path1), self._srt_parser(self.path2))
             return {self.lang[0]:text1, self.lang[1]:text2}
@@ -49,7 +49,7 @@ class SUBTITLES_PARSER(object):
                 text2.append(dict2[key])
         return text1, text2
     
-    def _smi_decode(self, path):
+    def _smi_parser(self, path):
         try:
             f = open(path, 'r')
             rawtexts = f.readlines()
