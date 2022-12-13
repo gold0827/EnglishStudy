@@ -69,14 +69,8 @@ class SUBTITLES_PARSER(object):
             if '<font' in rawtext:            
                 continue
             if start_flag:
-                rawtext = rawtext.replace('\n', '')  
-                rawtext = rawtext.replace('<br>', ' ')  
-                rawtext = rawtext.replace('-', ' ')                  
-                rawtext = rawtext.replace("'   ", '')                 
-                rawtext = rawtext.replace("'  ", '')            
-                rawtext = rawtext.replace("' ", '')          
-                rawtext = rawtext.replace("    ", ' ')    
-                rawtext = rawtext.replace("   ", ' ')    
+                rawtext = rawtext.replace('\n', '').replace('<br>', ' ').replace('-', ' ').replace("'   ", '')                 
+                rawtext = rawtext.replace("'  ", '').replace("' ", '').replace("    ", ' ').replace("   ", ' ')    
                 rawtext = rawtext.replace("  ", ' ')  
                 temp_text += rawtext.replace('\n', '')            
         f.close()
