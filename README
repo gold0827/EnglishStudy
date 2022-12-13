@@ -16,11 +16,11 @@ How to use this script to generate language study material with two Netflix subt
    - subtitles_dir = './subtitles'
      
    Subtitle names 
-   - subtitle01    = 'Wednesday.S01E01.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_en.srt'
-   - subtitle02    = 'Wednesday.S01E01.Wednesdays.Child.is.Full.of.Woe.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_ko.srt'
+   - subtitle01    = '.srt'
+   - subtitle02    = '.srt'
 
    Generated file name
-   - output_file   = 'WednesdayS01E01.pdf'
+   - output_file   = '.pdf'
 
    Font file name
    - font_file     = 'Arial-Unicode-Regular.ttf'
