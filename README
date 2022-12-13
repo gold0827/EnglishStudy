@@ -1,0 +1,40 @@
+How to use this script to generate language study material with two Netflix subtitles.
+
+1. Download Netflix subtitles ".srt" with chrome Netflix subtitles downloader extensions.
+
+2. Save the subtitles in the "subtitles" directory.
+
+3. Set below configs in config.py 
+
+   Font files storage directory
+   - fonts_dir     = './fonts' 
+     
+   Generated files directory
+   - output_dir    = './results'
+     
+   Netflix subtiles storage directory
+   - subtitles_dir = './subtitles'
+     
+   Subtitle names 
+   - subtitle01    = 'Wednesday.S01E01.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_en.srt'
+   - subtitle02    = 'Wednesday.S01E01.Wednesdays.Child.is.Full.of.Woe.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-SMURF_ko.srt'
+
+   Generated file name
+   - output_file   = 'WednesdayS01E01.pdf'
+
+   Font file name
+   - font_file     = 'Arial-Unicode-Regular.ttf'
+
+   If you want to add an empty line every next to the two lines, set add_line to True.
+   - add_line      = False
+
+   For double checking
+   - target_lang   = ['en', 'ko'] 
+
+4. Command "pip install fpdf" in the terminal.
+
+5. Command "python convert.py"
+
+6. A pdf file is generated.
+
+Done.

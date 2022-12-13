@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-class SUBTITLES_READER(object):
+class SUBTITLES_PARSER(object):
     def __init__(self):
         pass
 
@@ -20,20 +20,20 @@ class SUBTITLES_READER(object):
             assert self.sub_type == '.xlsx', 'Ext is not Netflix xlsx'
         self.lang = lang
 
-    def decode(self) -> dict:
+    def parser(self) -> dict:
         if self.sub_type == '.smi':
             return {self.lang[0]:self._smi_decode(self.path1), self.lang[1]:self._smi_decode(self.path2)}
         elif self.sub_type == '.srt':
-            text1, text2 = self._join_twosrt(self._srt_decode(self.path1), self._srt_decode(self.path2))
+            text1, text2 = self._join_twosrt(self._srt_parser(self.path1), self._srt_parser(self.path2))
             return {self.lang[0]:text1, self.lang[1]:text2}
         elif self.sub_type == '.xlsx':
-            text1, text2 = self._xlsx_decode(self.path)
+            text1, text2 = self._xlsx_parser(self.path)
             return {self.lang[0]:text1, self.lang[1]:text2}
         else:
             print("Wrong type subtitle!")
             exit()
     
-    def _xlsx_decode(self, path):
+    def _xlsx_parser(self, path):
         df = pd.read_excel(path)
         return df['Subtitle'].to_list(), df['Translation'].str.replace('\n',' ').str.replace('\u200e','').to_list()
 
@@ -82,7 +82,7 @@ class SUBTITLES_READER(object):
         f.close()
         return text
 
-    def _srt_decode(self, path):
+    def _srt_parser(self, path):
         f = open(path, 'r')
         rawtexts = f.readlines()
         texts = {}
